@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
 
 func main(){
-	fmt.Println("Hello, Go CLI!!")
+	length:= flag.Int("length",12,"Password length")
+	flag.Parse();
+
+	fmt.Println("Password length:", *length)
 }
