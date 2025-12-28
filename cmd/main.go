@@ -27,6 +27,7 @@ func expandCombinedFlags(args []string) []string {
 	return result
 }
 
+var version = "dev"
 
 func main() {
 	var (
@@ -38,7 +39,10 @@ func main() {
 		count         int
 		clipboardFlag bool
 		noAmbiguous   bool
+		showVersion   bool
 	)
+	flag.BoolVar(&showVersion, "version", false, "Show version information")
+	flag.BoolVar(&showVersion, "v", false, "Show version information (shorthand)")
 
 	flag.IntVar(&length, "length", 12, "Password length")
 	flag.IntVar(&length, "L", 12, "Password length (shorthand)")
@@ -90,6 +94,11 @@ func main() {
 
 	if len(os.Args) == 1 {
 		flag.Usage()
+		return
+	}
+
+	if showVersion {
+		fmt.Printf("passgen version %s\n", version)
 		return
 	}
 
