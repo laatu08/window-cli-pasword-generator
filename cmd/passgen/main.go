@@ -7,6 +7,8 @@ import (
 
 	"github.com/atotto/clipboard"
 	"github.com/laatu08/passgen/internal/generator"
+
+	"runtime/debug"
 )
 
 func expandCombinedFlags(args []string) []string {
@@ -28,6 +30,15 @@ func expandCombinedFlags(args []string) []string {
 }
 
 var version = "dev"
+
+
+func printVersion() {
+	if info, ok := debug.ReadBuildInfo(); ok {
+		fmt.Printf("passgen %s\n", info.Main.Version)
+	} else {
+		fmt.Println("passgen version unknown")
+	}
+}
 
 func main() {
 	var (
@@ -98,7 +109,7 @@ func main() {
 	}
 
 	if showVersion {
-		fmt.Printf("passgen version %s\n", version)
+		printVersion()
 		return
 	}
 
